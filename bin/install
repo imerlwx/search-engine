@@ -1,0 +1,21 @@
+#!/bin/bash
+# insta485install
+# Stop on errors
+# See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -Eeuo pipefail
+set -x
+# Create a Python virtual environment
+python3 -m venv env
+# Activate Python virtual environment
+source env/bin/activate
+# Avoid PermissionDenied errors when updating packages
+mkdir -p tmp
+export TMPDIR=tmp
+# Install back end
+pip install -r requirements.txt
+pip install -e index_server
+pip install -e search_server
+# Install front end
+npm ci .
+
+pip install madoop
