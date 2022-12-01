@@ -21,11 +21,12 @@ for doc in csv.reader(sys.stdin):
     doc_id = doc[0]
     doc_title = doc[1]
     doc_text = doc[2]
-    # Remove non-alphanumeric characters (that also aren’t spaces)
+
     # Combine both document title and document body by concatenating them
     doc_title_text = doc_title + " " + doc_text
+
+    # Remove non-alphanumeric characters (that also aren’t spaces)
     doc_title_text = re.sub(r"[^a-zA-Z0-9 ]+", "", doc_title_text)
-    doc_title_text = re.sub(r"[ ]+", " ", doc_title_text)
 
     # Convert upper case characters to lower case
     doc_title_text = doc_title_text.casefold()
