@@ -1,17 +1,6 @@
 """Mathematical process: calculate the score of the documents."""
 
 import index
-import flask
-
-
-def get_weight():
-    """Get weight from the user's input and clean it up."""
-    weight = flask.request.args.get('w')
-    # Use the default weight if no weight specified
-    if weight is None:
-        weight = 0.5
-    else:
-        weight = float(weight)
 
 
 def get_tf_idf(vector1, vector2):
@@ -35,10 +24,10 @@ def get_scores(query_vector, doc_dict, weight):
         tf_idf_score = get_tf_idf(query_vector, doc_vector)
         score = weight * pagerank + (1 - weight) * tf_idf_score
         doc_scores.append({
-            "doc_id": doc_id,
+            "docid": doc_id,
             "score": score
         })
 
     # Sort the scores from highest to lowest, then sort by doc_id inversely
-    doc_scores.sort(key=lambda x: (x["score"], -x["doc_id"]), reverse=True)
+    doc_scores.sort(key=lambda x: (-x["score"], x["docid"]))
     return doc_scores

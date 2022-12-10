@@ -15,6 +15,6 @@ app.config["INDEX_PATH"] = os.getenv("INDEX_PATH", "inverted_index_1.txt")
 
 app.config["PAGERANK"] = {} # doc_id: pagerank
 app.config["STOPWORDS"] = [] # a list of stop words
-app.config["Inverted_index"] = {} # word: {idf: idf, [{doc_id, tf, norm}, ...]}
+app.config["INVERTED_INDEX"] = {} # word: {idf: idf, [{doc_id, tf, norm}, ...]}
 
 import index.api  # noqa: E402  pylint: disable=wrong-import-position

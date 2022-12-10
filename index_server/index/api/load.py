@@ -18,7 +18,7 @@ def load_pagerank(index_dir):
         for line in pagerank_file.readlines():
             line = line.rstrip()
             doc_id, pagerank = line.split(",")
-            index.app.config["PAGERANK"][doc_id] = float(pagerank)
+            index.app.config["PAGERANK"][int(doc_id)] = float(pagerank)
 
 
 def load_inverted_index(index_dir):
@@ -32,9 +32,9 @@ def load_inverted_index(index_dir):
             docs = []
             for i in range(2, len(line), 3):
                 docs.append({
-                    "doc_id": line[i],
-                    "tf": line[i + 1],
-                    "norm": line[i + 2]
+                    "doc_id": int(line[i]),
+                    "tf": int(line[i + 1]),
+                    "norm": float(line[i + 2])
                 })
             index.app.config["INVERTED_INDEX"][word] = {
                 "idf": float(idf),
