@@ -17,10 +17,11 @@ fi
 case $1 in
   "create")
     if [ -e var/search.sqlite3 ]; then
+      echo "Error: database already exists"
+      exit 1
+    else
       mkdir -p var/
       sqlite3 var/search.sqlite3 < search_server/search/sql/search.sql
-    else
-      echo "Error: database already exists"
     fi
     ;;
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reduce 2: Calculate tf, idf and normalize factor for each term in each doc."""
+"""Reduce 2: Calculate tf, idf and norm factor for each term in each doc."""
 
 import sys
 import json

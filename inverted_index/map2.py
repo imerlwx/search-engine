@@ -16,11 +16,11 @@ for line in sys.stdin:
     word = word_detail[0]
     word_json = json.loads(word_detail[1])
 
-    nk = len(word_json) # number of documents that contain the word tk
-    idf = math.log(num_doc / nk, 10) # idf of term tk
+    nk = len(word_json)  # number of documents that contain the word tk
+    idf = math.log(num_doc / nk, 10)  # idf of term tk
 
     for doc_id, tf in word_json.items():
-        norm = (float(tf) * idf) ** 2 # norm for one term of one doc
+        norm = (float(tf) * idf) ** 2  # norm for one term of one doc
         info = json.dumps({
             "word": word,
             "doc_id": doc_id,

@@ -4,8 +4,8 @@
 import sys
 
 
-doc_count = 0
+DOC_COUNT = 0
 for doc in sys.stdin:
-    doc_count += 1
+    DOC_COUNT += 1
 
-print(f"docs\t{doc_count}")
+print(f"docs\t{DOC_COUNT}")

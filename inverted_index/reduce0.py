@@ -4,8 +4,8 @@
 import sys
 
 
-doc_count = 0
+DOC_COUNT = 0
 for line in sys.stdin:
-    doc_count += int(line.partition('\t')[2])
+    DOC_COUNT += int(line.partition('\t')[2])
 
-print(doc_count)
+print(DOC_COUNT)

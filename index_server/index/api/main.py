@@ -9,15 +9,6 @@ from index.api.doc import get_docs_dict
 from index.api.score import get_scores
 
 
-@index.app.before_first_request
-def get_start():
-    """Load stopwords, pagerank, and inverted index into memory."""
-    index_dir = pathlib.Path(__file__).parent.parent
-    load_stopwords(index_dir)
-    load_pagerank(index_dir)
-    load_inverted_index(index_dir)
-
-
 @index.app.route('/api/v1/', methods=['GET'])
 def get_index():
     """Return a list of services available."""
@@ -31,6 +22,12 @@ def get_index():
 @index.app.route('/api/v1/hits/', methods=['GET'])
 def get_hits():
     """Return a list of hits with doc ID and score."""
+    # Load stopwords, pagerank, and inverted index into memory
+    index_dir = pathlib.Path(__file__).parent.parent
+    load_stopwords(index_dir)
+    load_pagerank(index_dir)
+    load_inverted_index(index_dir)
+
     # Get query string from the user's input
     query = flask.request.args.get("q")
     query = clean_query(query)
@@ -38,7 +35,7 @@ def get_hits():
     if not valid_query(query):
         context = {
             "hits": []
-        } 
+        }
         return flask.jsonify(**context)
 
     # Get weight from the user's input

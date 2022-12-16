@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reduce 1: Parse each word into word \t {docid1: frequency1, ...}."""
+"""Reduce 1: Parse each word into 'word tab {docid1: frequency1, ...}'."""
 
 import sys
 import json
@@ -13,14 +13,14 @@ def reduce_one_group(key, group):
         word = line.split('\t')[0]
         value_json = json.loads(line.split('\t')[1])
         doc_id = value_json['doc_id']
-        tf = value_json['tf']
+        term_freq = value_json['tf']
         if word not in term_dict:
-            term_dict[word] = {doc_id: tf}
+            term_dict[word] = {doc_id: term_freq}
         else:
             if doc_id not in term_dict[word]:
-                term_dict[word][doc_id] = tf
+                term_dict[word][doc_id] = term_freq
             else:
-                term_dict[word][doc_id] += tf
+                term_dict[word][doc_id] += term_freq
 
     for word, id_tf_pair in term_dict.items():
         id_tf_pair_json = json.dumps(id_tf_pair, separators=(',', ':'))

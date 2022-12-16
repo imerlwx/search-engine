@@ -28,19 +28,19 @@ def get_docs_dict(query):
     query_set = set(query)
     valid_docs = get_valid_docs(query_set)
 
-    # Construct a dictionary with the following format 
+    # Construct a dictionary with the following format
     # {doc_id1: {tf_idf: [tfi1 * idf1, ...], norm: norm}
     for query_term in query_set:
         idf = index.app.config["INVERTED_INDEX"][query_term]["idf"]
         for doc in index.app.config["INVERTED_INDEX"][query_term]["docs"]:
             doc_id = doc["doc_id"]
             if doc_id in valid_docs:
-                tf = doc["tf"]
-                if doc_id not in docs_dict.keys():
+                term_freq = doc["tf"]
+                if doc_id not in docs_dict:
                     docs_dict[doc_id] = {}
                     docs_dict[doc_id]["norm"] = doc["norm"]
                     docs_dict[doc_id]["tf-idf"] = []
-                docs_dict[doc_id]["tf-idf"].append(tf * idf)
+                docs_dict[doc_id]["tf-idf"].append(term_freq * idf)
 
     # Normalize the vectors and construct the docs matrix
     for _, doc_detail in docs_dict.items():

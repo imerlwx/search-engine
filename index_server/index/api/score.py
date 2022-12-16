@@ -8,11 +8,11 @@ def get_tf_idf(vector1, vector2):
     if len(vector1) != len(vector2):
         return None
 
-    sum = 0
-    for i in range(len(vector1)):
-        sum += vector1[i] * vector2[i]
+    tfidf_sum = 0
+    for i, item in enumerate(vector1):
+        tfidf_sum += item * vector2[i]
 
-    return sum
+    return tfidf_sum
 
 
 def get_scores(query_vector, doc_dict, weight):
