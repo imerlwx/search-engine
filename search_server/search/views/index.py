@@ -13,7 +13,7 @@ def get_hits(search_url, thread_result):
     return thread_result.put(requests.get(search_url, timeout=10))
 
 
-def key_func(hits):
+def keyfunc(hits):
     """Define a key function for the heapq.merge."""
     return hits['score']
 
@@ -63,7 +63,7 @@ def show_index():
             hits_detail = thread_result.get().json()
             results_list.append(hits_detail['hits'])
 
-        results_list = heapq.merge(*results_list, key=key_func, reverse=True)
+        results_list = heapq.merge(*results_list, key=keyfunc, reverse=True)
         count = 10  # number of hit info shown on the page
         for result in results_list:
             context['results'].append(get_doc(result['docid']))

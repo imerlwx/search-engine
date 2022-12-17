@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Map 1: Parse each word into word /t {docid, 1} for each document."""
+"""Map 1: Parse each word into word tab {docid, 1} for each document."""
 
 import sys
 import re
